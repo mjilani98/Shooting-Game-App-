@@ -190,7 +190,7 @@ public class Game
         this.sceneWidth = 1080;
 
         //initialize ball coordinates
-        this.ballX = sceneWidth  * Math.random()-80;
+        this.ballX = gunX + 200 + Math.random() * (sceneWidth - (gunX + 200));
         this.ballY = sceneHeight - 55;
         this.ballSpeed = 10 + 15 * Math.random();
 

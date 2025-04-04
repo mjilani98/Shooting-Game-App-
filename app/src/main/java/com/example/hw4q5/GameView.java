@@ -40,8 +40,14 @@ public class GameView extends View
         Paint paint = new Paint();
 
         //draw background
-        paint.setColor(Color.parseColor("#AAAAAA"));
+        paint.setColor(Color.parseColor("#AAAAAA")); // medium grey color
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(0, 0, (float)sceneWidth, (float)sceneHeight, paint);
+
+        //draw ball
+        paint.setColor(Color.parseColor("#0000FF")); // blue color
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle((float)ballX, (float)(sceneHeight - ballY), (float)radius, paint);
+
     }
 }

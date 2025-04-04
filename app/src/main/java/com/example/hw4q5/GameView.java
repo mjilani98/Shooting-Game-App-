@@ -35,6 +35,10 @@ public class GameView extends View
         double gunX = game.getGunX();
         double gunY = game.getGunY();
 
+        //get location of the bullet
+        double bulletX = game.getBulletX();
+        double bulletY = game.getBulletY();
+
 
         //get radius of ball/bullet
         double radius = game.getRadius();
@@ -58,6 +62,12 @@ public class GameView extends View
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(30);
         canvas.drawLine((float)gunX, (float)(sceneHeight - gunY), (float)(gunX + game.getGunLength()), (float)(sceneHeight - gunY), paint);
+
+        //draw bullet
+        paint.setColor(Color.parseColor("#660000"));
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle((float)bulletX +(float) game.getGunLength(), (float)(sceneHeight - bulletY), (float)radius, paint);
+
 
     }
 }

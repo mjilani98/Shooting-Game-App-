@@ -1,5 +1,7 @@
 package com.example.hw4q5;
 
+import android.media.SoundPool;
+
 public class Game
 {
     //scene coordinates
@@ -28,13 +30,18 @@ public class Game
     private boolean hit; //ball hit
     private boolean fired; //gun fired
 
-
+    private SoundPool soundPool;             //sound pool
+    private int soundId;                     //sound id
 
     //public constructor
-    public Game()
+    public Game(SoundPool soundPool, int soundId)
     {
         //create Initial game
         initializeGame();
+
+        //set sound pool and sound id
+        this.soundPool = soundPool;
+        this.soundId = soundId;
     }
 
     //method update game model
@@ -53,6 +60,7 @@ public class Game
 
     }
 
+    //method checks weather if ball and bullet are out of the scene
     private boolean sceneClear()
     {
         //check ball has gone past bottom boundaries of scene
@@ -85,6 +93,10 @@ public class Game
 
             //determine weather the ball is hit or not
             hit = decideHit();
+
+            //if ball is just hit , play sound
+            if (hit)
+                soundPool.play(soundId, 1, 1, 1, 0, 1);
         }
         else
         {
@@ -93,6 +105,8 @@ public class Game
             ballX = -100;
         }
     }
+
+    //method decides if the ball has been hit or not
     private boolean decideHit()
     {
         //find distance between bullet and ball
@@ -103,8 +117,6 @@ public class Game
         //check distance is within the closeness threshold
         return distance <= distanceThreshold;
     }
-
-
 
     //getters
 
@@ -170,7 +182,6 @@ public class Game
         return radius;
     }
 
-
     //method initialize coordinates for the game
     private void initializeGame()
     {
@@ -204,7 +215,7 @@ public class Game
 
         //initialize radius - size of the ball/bullet
         this.radius = 50;
-        this.distanceThreshold = 50;
+        this.distanceThreshold = 100;
     }
 
 }

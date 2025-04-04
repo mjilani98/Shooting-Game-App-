@@ -12,10 +12,15 @@ public class Game
     private double ballSpeed; //speed of the ball
 
     //gun coordinates
-    private double gunX ;
-    private double gunY;
-    private double gunAngle;
-    private double gunLength;
+    private double gunX ;  //x coordinates of the gun
+    private double gunY;   //y coordinates of the gun
+    private double gunAngle; //angle of the gun
+    private double gunLength; //length of the gun
+
+    //bullet coordinates
+    private double bulletX;          //x coordinate of bullet
+    private double bulletY;          //y coordinate of bullet
+    private double bulletSpeed;      //speed of bullet
 
     private double radius;  //radius of the ball , bullet
     private boolean hit; //ball hit
@@ -103,6 +108,20 @@ public class Game
         return sceneWidth;
     }
 
+    //get bullet variables
+    public double getBulletX() //get the bullet x
+    {
+        return bulletX;
+    }
+    public double getBulletY() //get the bullet y
+    {
+        return bulletY;
+    }
+    public double getBulletSpeed() //get bullet speed
+    {
+        return bulletSpeed;
+    }
+
     //get radius
     public double getRadius()
     {
@@ -129,6 +148,12 @@ public class Game
         this.gunX = 0;
         this.gunLength = 200;
         this.gunAngle = 0 ;
+
+        //initialize bullet coordinates
+        this.bulletX = gunX;
+        this.bulletY = gunY;
+        this.bulletSpeed = 20;
+
 
 
         //initialize radius - size of the ball/bullet

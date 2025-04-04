@@ -58,7 +58,7 @@ public class GameView extends View
         canvas.drawCircle((float)ballX, (float)(sceneHeight - ballY), (float)radius, paint);
 
         //draw gun
-        paint.setColor(Color.parseColor("#660000"));
+        paint.setColor(Color.parseColor("#000000"));
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(30);
         canvas.drawLine((float)gunX, (float)(sceneHeight - gunY), (float)(gunX + game.getGunLength()), (float)(sceneHeight - gunY), paint);

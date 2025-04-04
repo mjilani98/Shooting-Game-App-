@@ -1,5 +1,6 @@
 package com.example.hw4q5;
 
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -28,8 +29,13 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
+        //create sound pool builder, sound pool, sound id
+        SoundPool.Builder soundPoolBuilder = new SoundPool.Builder();
+        SoundPool soundPool = soundPoolBuilder.build();
+        int soundId = soundPool.load(this, R.raw.explosion, 1);
+
         //create game model
-        game = new Game();
+        game = new Game(soundPool,soundId);
 
         //create game view
         gameView = new GameView(this,game);

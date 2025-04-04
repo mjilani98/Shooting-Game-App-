@@ -23,6 +23,7 @@ public class Game
     private double bulletSpeed;      //speed of bullet
 
     private double radius;  //radius of the ball , bullet
+    private double distanceThreshold;        //closeness threshold of bird/bullet
 
     private boolean hit; //ball hit
     private boolean fired; //gun fired
@@ -46,6 +47,17 @@ public class Game
         if(fired)
             moveBullet();
 
+        //if scene is clear create initial game again
+        if (sceneClear())
+            initializeGame();
+
+    }
+
+    private boolean sceneClear()
+    {
+        //check ball has gone past bottom boundaries of scene
+        //and check bullet has gone past top boundary of scene
+        return (ballX < 0 || ballY < 0) && bulletX > sceneWidth;
     }
 
     //method fires the fun
@@ -74,12 +86,22 @@ public class Game
             //determine weather the ball is hit or not
             hit = decideHit();
         }
+        else
+        {
+            //if the ball has been hit , move it off the screen
+            ballY = -100;
+            ballX = -100;
+        }
     }
     private boolean decideHit()
     {
         //find distance between bullet and ball
+        //find distance between bird and bullet
+        double distance = Math.sqrt((ballX - bulletX)*(ballX - bulletX) +
+                (ballY - bulletY)*(ballY - bulletY));
 
-        return false;
+        //check distance is within the closeness threshold
+        return distance <= distanceThreshold;
     }
 
 
@@ -166,7 +188,7 @@ public class Game
         int max = 1070;// maximum gun location on the screen
         this.gunY =  min + (int)(Math.random() * ((max - min + 1))); //generate a random location
         this.gunX = 0;
-        this.gunLength = 200;
+        this.gunLength = 150;
         this.gunAngle = 0 ;
 
         //initialize bullet coordinates
@@ -174,10 +196,15 @@ public class Game
         this.bulletY = gunY;
         this.bulletSpeed = 20;
 
+        //turn off the gun
+        fired = false;
 
+        //set hit to false
+        hit = false;
 
         //initialize radius - size of the ball/bullet
         this.radius = 50;
+        this.distanceThreshold = 50;
     }
 
 }

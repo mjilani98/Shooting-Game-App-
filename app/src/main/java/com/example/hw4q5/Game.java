@@ -23,7 +23,9 @@ public class Game
     private double bulletSpeed;      //speed of bullet
 
     private double radius;  //radius of the ball , bullet
+
     private boolean hit; //ball hit
+    private boolean fired; //gun fired
 
 
 
@@ -37,10 +39,29 @@ public class Game
     //method update game model
     public void update()
     {
-        //move ball
+        //at start move ball
         moveBall();
+
+        //if gun is fired , move the bullet
+        if(fired)
+            moveBullet();
+
     }
 
+    //method fires the fun
+    public void fire()
+    {
+        //set fired to true
+        fired = true;
+    }
+
+    //method moves the bullet
+    private void moveBullet()
+    {
+        //change x, y coordinates of bullet, using its speed and angle
+        bulletX = bulletX + bulletSpeed*Math.cos(gunAngle*Math.PI/180);
+        bulletY = bulletY + bulletSpeed*Math.sin(gunAngle*Math.PI/180);
+    }
 
     //method moves the ball
     private void moveBall()
@@ -54,7 +75,6 @@ public class Game
             hit = decideHit();
         }
     }
-
     private boolean decideHit()
     {
         //find distance between bullet and ball
